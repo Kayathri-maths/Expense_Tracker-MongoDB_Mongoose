@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.home {
+    text-align: center;
+}
+
+body {
+    background-color: lightblue;
+}
+
+.welcome {
+    padding: 20px 0;
+}
+
+.heading {
+    padding: 80px;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: rgb(53, 28, 28);
+}
+
+.para {
+    font-size: 1.3rem;
+    align-items: center;
+    width: 60%;
+    margin-left: 20%;
+
+}
+
+.pages {
+    padding: 100px;
+}
+
+.pages a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    border: 2px solid rgb(177, 121, 121);
+    margin-left: 25px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    color: brown;
+}
+
+.pages a:hover {
+    color: #fff;
+    background-color: brown;
+    border: none;
+    padding: 12px;
+}
+
+@media only screen and (max-width:425px) {
+    .pages a {
+        display: block;
+        margin-top: 10px;
+        padding: 10px 5px;
+    }
+}
