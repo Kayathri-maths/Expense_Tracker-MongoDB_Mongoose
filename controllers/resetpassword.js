@@ -12,9 +12,7 @@ const forgotpassword = async (req, res, next) => {
         console.log(user);
 
         if (user) {
-            const id = uuid.v4();
-            console.log(user.id);
-            await forgotPassword.create({ active: true,userId:user._id });
+        const fp = await forgotPassword.create({ active: true,userId:user._id });
 
             const client = Sib.ApiClient.instance;
             const apiKey = client.authentications['api-key'];
@@ -33,10 +31,10 @@ const forgotpassword = async (req, res, next) => {
                await transEmailApi.sendTransacEmail({
                 sender,
                 to: receiver,
-                subject: `fogotPassword`,
+                subject: `forgotPassword`,
                 textContent: `Follow the link and reset the password`,
                 htmlContent: `<h1>click on the link below to reset the password</h1><br>
-                <a href="http://localhost:3000/password/resetpassword/${id}">Reset your password</a>`,
+                <a href="http://localhost:3000/password/resetpassword/${fp._id}">Reset your password</a>`,
             })
                 console.log('Link to reset password sent to your mail')
                 return res.status(202).json({ success: true, message: "Link to reset password sent to your mail" });
@@ -58,9 +56,10 @@ const forgotpassword = async (req, res, next) => {
 const resetpassword = async (req, res) => {
     const id = req.params.id;
     const ForgotPassword = await forgotPassword.findById(id);
+    console.log('forgotpassword', ForgotPassword);
     console.log(ForgotPassword);
     if (ForgotPassword) {
-        await forgotPassword.updateOne({id: forgotPassword.id},{ active: false });
+        await forgotPassword.updateOne({_id: ForgotPassword._id},{ active: false });
         res.status(200).send(
                                 `<html>
                                         <script>

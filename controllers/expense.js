@@ -13,9 +13,9 @@ const addExpense = async (req, res, next) => {
         }
         const expense = await Expense.create({  createdAt: new Date(), expenseamount, description, category, userId: req.user._id });
         const totalExpense = Number(req.user.totalExpenses) + Number(expenseamount);
-        console.log(totalExpense);
+        console.log('totalexpenses...',totalExpense);
         await User.updateOne(
-                 { id: req.user._id },
+                 { _id: req.user._id },
                  {totalExpenses: totalExpense });
         res.status(201).json({ expense, success: true })
     } catch (err) {
@@ -31,10 +31,10 @@ const getexpenses = async (req, res, next) => {
       let itemsPerPage = +req.query.Rows || 10; // Number of expenses per page
     
       const totalExpenses=await Expense.countDocuments({ userId: req.user._id});
-      const expenses = await Expense.find({ userId: req.user.id })
+      const expenses = await Expense.find({ userId: req.user._id })
       .skip((page -1)* itemsPerPage)
       .limit(itemsPerPage)
-      .sort({_id: 1});
+      .sort({_id: 1});  // 1-ascending order
 
      
     res.status(200).json({

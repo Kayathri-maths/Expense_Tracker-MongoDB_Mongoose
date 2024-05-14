@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const app = express();
-const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
